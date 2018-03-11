@@ -1,17 +1,13 @@
 package com.enterprise.common;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
-import com.enterprise.core.SystemManage;
-import com.enterprise.service.manage.systemSetting.bean.SystemSetting;
 
 /**
  * 菜单遍历实体类
  */
-public class MenuItem{
+public class MenuItem implements Serializable{
 	private String id;	//id
 	private String pid;	//父id
 	private String url;	//链接

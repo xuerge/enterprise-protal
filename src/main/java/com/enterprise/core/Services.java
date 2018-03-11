@@ -1,8 +1,8 @@
 package com.enterprise.core;
 
-import java.util.List;
-
 import com.enterprise.page.PageModel;
+
+import java.util.List;
 
 public interface Services <E extends PageModel>{
     /**
@@ -49,5 +49,7 @@ public interface Services <E extends PageModel>{
      * @return
      */
     public List<E> selectList(E e);
+
+
 
 }

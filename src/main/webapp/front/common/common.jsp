@@ -24,22 +24,29 @@
     <meta name="keywords" content="<%=SystemManage.getInstance().getSystemSetting().getKeywords() %>"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><%=SystemManage.getInstance().getSystemSetting().getTitle()%>
+    <title>
+        <%=SystemManage.getInstance().getSystemSetting().getTitle()%>
     </title>
     <link rel="shortcut icon" type="image/x-icon"
-          href="<%=SystemManage.getInstance().getSystemSetting().getImageRootPath() %><%=SystemManage.getInstance().getSystemSetting().getFavicon() %>">
-    <link rel="stylesheet" href="<%=path%>/resource/css/style.css">
+          href="<%=SystemManage.getInstance().getSystemSetting().getImageRootPath() %>
+            <%=SystemManage.getInstance().getSystemSetting().getFavicon() %>" />
+
+    <link rel="stylesheet" href="<%=path%>/resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=path%>/resource/css/base.css">
+    <link rel="stylesheet" href="<%=path%>/resource/css/inside.css">
     <script type="text/javascript" src="<%=path %>/resource/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="<%=path%>/resource/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="<%=path%>/resource/js/TouchSlide.1.1.js"></script>
+
 </head>
 
-<%
+    <%
     SystemSetting s=SystemManage.getInstance().getSystemSetting();
     if (s != null && StringUtils.isNotBlank(s.getIsopen())
             && !Boolean.valueOf(s.getIsopen())) {
 %>
-    <%@include file="/front/common/close.jsp" %>
-<%
+<%@include file="/front/common/close.jsp" %>
+    <%
         return;
     }
 %>

@@ -1,5 +1,6 @@
 package com.enterprise.cache;
 
+import com.enterprise.core.SystemManage;
 import com.enterprise.page.PageModel;
 import com.enterprise.service.manage.about.AboutService;
 import com.enterprise.service.manage.about.bean.About;
@@ -14,14 +15,13 @@ import com.enterprise.service.manage.indeximg.bean.IndexImg;
 import com.enterprise.service.manage.messages.MessageService;
 import com.enterprise.service.manage.messages.bean.Messages;
 import com.enterprise.service.manage.recruitment.RecruitmentService;
+import com.enterprise.service.manage.recruitment.bean.Recruitment;
 import com.enterprise.service.manage.service.ServiceService;
 import com.enterprise.service.manage.service.bean.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.enterprise.service.manage.recruitment.bean.Recruitment;
-
-import com.enterprise.core.SystemManage;
+import com.enterprise.service.manage.system.impl.MenuService;
 import com.enterprise.service.manage.systemSetting.SystemSettingService;
 import com.enterprise.service.manage.systemSetting.bean.SystemSetting;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
@@ -49,6 +49,8 @@ public class FrontCache implements ServletContextAware {
 	private AboutService aboutService;
 	@Autowired
 	private ServiceService serviceService;
+	@Autowired
+	private MenuService menuService;
 
 	@Autowired
     public void setSystemManage(SystemManage systemManage) {
@@ -75,6 +77,7 @@ public class FrontCache implements ServletContextAware {
 		loadContact();
 		loadAbout();
 		loadService();
+		systemManage.setNavi(menuService.loadNavi());
 	}
 	/**
 	 * 加载系统设置缓存
@@ -175,6 +178,4 @@ public class FrontCache implements ServletContextAware {
 		services = serviceService.selectList(new Service());
 		systemManage.setService(services);
 	}
-
-
 }

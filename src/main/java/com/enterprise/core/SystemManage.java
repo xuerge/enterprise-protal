@@ -2,6 +2,7 @@ package com.enterprise.core;
 
 import com.enterprise.cache.CacheProvider;
 import com.enterprise.cache.SimpleCacheProvider;
+import com.enterprise.common.MenuItem;
 import com.enterprise.service.manage.about.bean.About;
 import com.enterprise.service.manage.articlecategory.bean.ArticleCategory;
 import com.enterprise.service.manage.contact.bean.Contact;
@@ -66,6 +67,15 @@ public class SystemManage {
 
     private static <T extends Serializable> T getCacheObject(String key) {
         return (T) cacheProvider.get(buildKey(key));
+    }
+
+    // 导航菜单
+    public MenuItem getNavi() {
+        return getCacheObject("navi");
+    }
+    //
+    public void setNavi(MenuItem menu) {
+        putCacheObject("navi",menu);
     }
 
     //系统设置

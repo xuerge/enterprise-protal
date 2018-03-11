@@ -1,71 +1,66 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cesiumai
-  Date: 2016/6/15
-  Time: 17:04
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; UTF-8"
-         pageEncoding="UTF-8" %>
-<style>
-
-    .nav{
-        list-style: none outside none;
-    }
-    .nav li {
-        width: 77px;
-        height: 107px;
-        float: left;
-        line-height: 107px;
-        font-size: 17px;
-        color: #262626;
-        margin-left: 16px;
-        margin-right: 16px;
-        text-align: center;
-    }
-    .nav li a {
-        text-decoration: none;
-        color: inherit;
-        padding-top: 10px;
-        font-family: Microsoft Yahei;
-    }
+<%@ page import="com.enterprise.common.MenuItem" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="org.apache.commons.collections.CollectionUtils" %>
+<%@ page language="java" contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 
 
-    .nav li a:hover{
-        border-top: 3px solid #424C55;
+<div class="header">
+    <div class="g-in clearfix">
 
-    }
-</style>
-<div style="width:1100px;height: 107px;margin: 0 auto;">
-    <div style="width: 201px;height: 107px;float: left;">
-        <a href="index">
-        <img src="<%=SystemManage.getInstance().getSystemSetting().getImageRootPath() %><%=SystemManage.getInstance().getSystemSetting().getLogo() %>"
-             width="201" height="107"/>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="<%=SystemManage.getInstance().getSystemSetting().getImageRootPath()%>">
+                <img src="<%=SystemManage.getInstance().getSystemSetting().getLogo() %>" width="238" height="92">
             </a>
-    </div>
-    <div style="width: 768px;height: 107px;float: right;overflow: hidden">
-        <ul class="nav">
-            <li>
-                <a href="<%=path%>/index">首 页</a>
-            </li>
-            <li>
-                <a href="<%=path%>/about">关于我们</a>
-            </li>
-            <li>
-                <a href="<%=path%>/service">服务领域</a>
-            </li>
-            <li>
-                <a href="<%=path%>/article">新闻动态</a>
-            </li>
-            <li>
-                <a href="<%=path%>/recruitment">诚聘英才</a>
-            </li>
-            <li>
-                <a href="<%=path%>/message">在线留言</a>
-            </li>
-            <li>
-                <a href="<%=path%>/contact">联系我们</a>
-            </li>
-        </ul>
+        </div>
+
+        <div class="pcshow">
+            <!-- 顶部工具栏 -->
+            <div class="topbox">
+                <!-- 搜索框 -->
+                <div class="searchbox">
+                    <input type="text" value="请输入搜索关键字">
+                </div>
+                <span>400热线：400-887-8353</span>
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="navs">
+                <%-- 获取导航菜单--%>
+                <%
+                    MenuItem navi = SystemManage.getInstance().getNavi();
+                    if(null == navi || CollectionUtils.isEmpty(navi.getChildren())) {
+                        // 导航菜单不存在，不渲染
+                        return;
+                    }
+                %>
+                <ul class="clearfix">
+                    <%-- 渲染导航菜单--%>
+                    <% for(MenuItem menu : navi.getChildren()){ %>
+                        <!-- 一级菜单 -->
+                        <li>
+                            <a href="<%= menu.getUrl()%>" class=''><%= menu.getName()%></a>
+                            <!-- 二级菜单 -->
+                            <% if(CollectionUtils.isNotEmpty(menu.getChildren())){ %>
+                                <dl>
+                                    <% for(MenuItem subMenu : menu.getChildren()){ %>
+                                       <dt><a href=""><%=subMenu.getName()%></a></dt>
+                                    <% } %>
+                                </dl>
+                            <% } %>
+                        </li>
+                    <% } %>
+                </ul>
+
+                    <script type="text/javascript">
+                        $('.navs li').hover(function () {
+                            $(this).find('dl').stop(true, false).slideDown('fast');
+                        }, function () {
+                            $(this).find('dl').stop(true, false).slideUp('fast');
+                        });
+                    </script>
+
+            </div>
+        </div>
     </div>
 </div>
